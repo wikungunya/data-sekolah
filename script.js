@@ -1,5 +1,5 @@
 // 1. PASTE LINK GOOGLE SPREADSHEET (CSV) ANDA DI SINI
-const urlSpreadsheet = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR8EbUUCJAxWs6PwfjKKB8pCFURgglFZxkYL80vj6PL_ZlZCNAOa8S-8Pn0BaWSCDixNhcjwy-a29XH/pub?output=csv"; 
+const urlSpreadsheet = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR8EbUUCJAxWs6PwfjKKB8pCFURgglFZxkYL80vj6PL_ZlZCNAOa8S-8Pn0BaWSCDixNhcjwy-a29XH/pub?output=csv";
 
 // Mengambil elemen tombol dan area tabel dari HTML
 const tombolMuat = document.getElementById('tombolMuat');
