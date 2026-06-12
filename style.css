@@ -117,3 +117,39 @@ footer {
     font-size: 14px;
     margin-top: 20px;
 }
+
+/* --- Desain Kontrol Halaman (Pagination) --- */
+.wadah-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+/* Mengatur tombol pagination agar berbeda warna dengan tombol utama */
+.wadah-pagination button {
+    background-color: #6c757d; /* Warna abu-abu modern */
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    margin: 0; /* Menghilangkan margin bawaan */
+}
+
+.wadah-pagination button:hover {
+    background-color: #5a6268;
+}
+
+/* Mengatur tombol saat tidak bisa diklik (habis/mentok) */
+.wadah-pagination button:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+#infoHalaman {
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+}
