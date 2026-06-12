@@ -21,7 +21,7 @@ function ubahCsvKeTabel(teksCsv) {
         // Menyusun baris tabel baru
         hasilHtml += `<tr>
             <td>${i}</td>
-            <td>${kolom[0] || '-'}</td>
+            <td>${kolom[1] || '-'}</td>
             <td>${kolom[1] || '-'}</td>
             <td>${kolom[2] || '-'}</td>
         </tr>`;
