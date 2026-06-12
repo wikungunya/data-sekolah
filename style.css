@@ -80,16 +80,12 @@ button:hover {
 }
 
 .wadah-tabel {
-    width: 100%;          /* Membatasi lebar wadah sesuai layar */
-    overflow-x: auto;     /* Memunculkan scrollbar horizontal jika data kepanjangan */
-    -webkit-overflow-scrolling: touch; /* Biar gesernya mulus kalau dibuka di HP */
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    overflow-x: auto; /* Supaya tabel bisa digeser di HP kalau kepanjangan */
 }
 
 table {
-    width: 100%; /* Membatasi lebar wadah sesuai layar */
-    border-collapse: collapse; /* Memunculkan scrollbar horizontal jika data kepanjangan */
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 10px;
 }
 
@@ -117,4 +113,3 @@ footer {
     font-size: 14px;
     margin-top: 20px;
 }
-
