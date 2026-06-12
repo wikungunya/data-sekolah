@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Kelas - Dashboard Guru</title>
+    
+    <!-- Memanggil file CSS untuk menghias halaman -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Bagian Kepala / Header Web -->
+    <header>
+        <div class="kontainer">
+            <h1>Sistem Informasi Kelas Digital</h1>
+            <p>Selamat datang di portal informasi dan pendataan siswa.</p>
+        </div>
+    </header>
+
+    <!-- Bagian Konten Utama -->
+    <main class="kontainer">
+        
+        <!-- Kotak Ringkasan atau Sambutan -->
+        <section class="kartu-info">
+            <h2>Dashboard Kelas</h2>
+            <p>Aplikasi ini terhubung langsung dengan Google Spreadsheet Anda untuk menampilkan data secara otomatis.</p>
+            <button id="tombolMuat">Cek Koneksi Data</button>
+        </section>
+
+        <!-- Tempat Tabel Data Siswa Akan Muncul -->
+        <section class="area-tabel">
+            <h3>Data Nilai & Absensi Siswa</h3>
+            <div class="wadah-tabel">
+                <!-- Tabel ini awalnya kosong, nanti akan diisi oleh JavaScript -->
+                <table id="tabelSiswa">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Siswa</th>
+                            <th>Kelas</th>
+                            <th>Status/Nilai</th>
+                        </tr>
+                    </thead>
+                    <tbody id="kontenTabel">
+                        <tr>
+                            <td colspan="4" style="text-align: center; color: #888;">
+                                Data belum dimuat. Klik tombol di atas atau tunggu sistem membaca spreadsheet.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bagian Kaki / Footer Web -->
+    <footer>
+        <p>&copy; 2026 Hak Cipta Terpelihara - Halaman Web Guru SD</p>
+    </footer>
+
+    <!-- Memanggil file JavaScript untuk logika data -->
+    <script src="script.js"></script>
+</body>
+</html>
