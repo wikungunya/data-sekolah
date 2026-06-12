@@ -1,65 +1,54 @@
-// 1. LINK SPREADSHEET ANDA (SUDAH VALID)
+// 1. PASTE LINK GOOGLE SPREADSHEET (CSV) ANDA DI SINI
 const urlSpreadsheet = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR8EbUUCJAxWs6PwfjKKB8pCFURgglFZxkYL80vj6PL_ZlZCNAOa8S-8Pn0BaWSCDixNhcjwy-a29XH/pub?output=csv";
 
-// Mengambil elemen area tabel dan tombol dari HTML
-const kontenTabel = document.getElementById('kontenTabel');
+// Mengambil elemen tombol dan area tabel dari HTML
 const tombolMuat = document.getElementById('tombolMuat');
+const kontenTabel = document.getElementById('kontenTabel');
 
 // Fungsi untuk mengubah data teks CSV menjadi tabel HTML
 function ubahCsvKeTabel(teksCsv) {
+    // Memecah teks spreadsheet per baris
     const semuaBaris = teksCsv.split("\n");
     let hasilHtml = "";
 
+    // Membaca baris data (kita mulai dari baris kedua/indeks 1 agar judul kolom tidak ikut dobel)
     for (let i = 1; i < semuaBaris.length; i++) {
-        if (semuaBaris[i].trim() === "") continue; 
+        if (semuaBaris[i].trim() === "") continue; // Lewati jika ada baris kosong
 
+        // Memecah kolom yang dipisahkan oleh koma
         const kolom = semuaBaris[i].split(",");
 
-        // Menyusun baris sesuai jumlah kolom yang Anda miliki (5 kolom)
+        // Menyusun baris tabel baru
         hasilHtml += `<tr>
-            <td>${kolom[0] || i}</td> 
-            <td>${kolom[1] || '-'}</td> 
-            <td>${kolom[2] || '-'}</td> 
-            <td>${kolom[3] || '-'}</td> 
-            <td>${kolom[4] || '-'}</td> 
+            <td>${i}</td>
+            <td>${kolom[0] || '-'}</td>
+            <td>${kolom[1] || '-'}</td>
+            <td>${kolom[2] || '-'}</td>
         </tr>`;
     }
 
+    // Memasukkan baris-baris baru ke dalam tabel HTML
     kontenTabel.innerHTML = hasilHtml;
 }
 
-// FUNGSI UTAMA: Mengambil data dari Google Spreadsheet
-function muatDataOtomatis() {
-    if (tombolMuat) {
-        tombolMuat.textContent = "Sedang Memuat Data...";
-        tombolMuat.disabled = true;
-    }
+// Memberikan fungsi klik pada tombol untuk mengambil data
+tombolMuat.addEventListener('click', function() {
+    tombolMuat.textContent = "Sedang Memuat Data...";
+    tombolMuat.disabled = true;
 
+    // Mengambil data dari Google Spreadsheet
     fetch(urlSpreadsheet)
         .then(response => response.text())
         .then(data => {
             ubahCsvKeTabel(data);
-            
-            if (tombolMuat) {
-                tombolMuat.textContent = "Data Berhasil Diperbarui!";
-                tombolMuat.style.backgroundColor = "#28a745";
-                tombolMuat.disabled = false;
-            }
+            tombolMuat.textContent = "Data Berhasil Diperbarui!";
+            tombolMuat.style.backgroundColor = "#28a745";
+            tombolMuat.disabled = false;
         })
         .catch(error => {
-            alert("Gagal mengambil data otomatis. Pastikan koneksi internet aktif.");
+            alert("Gagal mengambil data. Pastikan link spreadsheet sudah benar.");
             console.error(error);
-            if (tombolMuat) {
-                tombolMuat.textContent = "Gagal Memuat, Coba Lagi";
-                tombolMuat.disabled = false;
-            }
+            tombolMuat.textContent = "Coba Lagi";
+            tombolMuat.disabled = false;
         });
-}
-
-// JALANKAN LANGSUNG TANPA MENUNGGU APAPUN
-muatDataOtomatis();
-
-// Tombol tetap berfungsi untuk refresh manual
-if (tombolMuat) {
-    tombolMuat.addEventListener('click', muatDataOtomatis);
-}
+});
