@@ -1,30 +1,20 @@
-// 1. LINK SPREADSHEET ANDA (SUDAH BENAR)
+// 1. LINK SPREADSHEET ANDA
 const urlSpreadsheet = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR8EbUUCJAxWs6PwfjKKB8pCFURgglFZxkYL80vj6PL_ZlZCNAOa8S-8Pn0BaWSCDixNhcjwy-a29XH/pub?output=csv";
 
-// Mengambil elemen tombol dan area tabel dari HTML
-const tombolMuat = document.getElementById('tombolMuat');
+// Mengambil elemen area tabel dan tombol dari HTML
 const kontenTabel = document.getElementById('kontenTabel');
+const tombolMuat = document.getElementById('tombolMuat');
 
-// Fungsi untuk mengubah data teks CSV menjadi tabel HTML (SUDAH DISESUAIKAN)
+// Fungsi untuk mengubah data teks CSV menjadi tabel HTML
 function ubahCsvKeTabel(teksCsv) {
-    // Memecah teks spreadsheet per baris
     const semuaBaris = teksCsv.split("\n");
     let hasilHtml = "";
 
-    // Membaca baris data (mulai dari baris kedua/indeks 1 agar judul kolom tidak ikut dobel)
     for (let i = 1; i < semuaBaris.length; i++) {
-        if (semuaBaris[i].trim() === "") continue; // Lewati jika ada baris kosong
+        if (semuaBaris[i].trim() === "") continue; 
 
-        // Memecah kolom yang dipisahkan oleh koma
         const kolom = semuaBaris[i].split(",");
 
-        // PENJELASAN INDEKS KOLOM:
-        // kolom[0] -> Berisi nomor urut dari Kolom A Spreadsheet
-        // kolom[1] -> Berisi Nama Siswa dari Kolom B Spreadsheet
-        // kolom[2] -> Berisi Kelas dari Kolom C Spreadsheet
-        // kolom[3] -> Berisi Status/Nilai dari Kolom D Spreadsheet
-
-        // Menyusun baris tabel baru
         hasilHtml += `<tr>
             <td>${kolom[0] || i}</td> 
             <td>${kolom[1] || '-'}</td> 
@@ -33,28 +23,42 @@ function ubahCsvKeTabel(teksCsv) {
         </tr>`;
     }
 
-    // Memasukkan baris-baris baru ke dalam tabel HTML
     kontenTabel.innerHTML = hasilHtml;
 }
 
-// Memberikan fungsi klik pada tombol untuk mengambil data
-tombolMuat.addEventListener('click', function() {
-    tombolMuat.textContent = "Sedang Memuat Data...";
-    tombolMuat.disabled = true;
+// FUNGSI UTAMA: Mengambil data dari Google Spreadsheet
+function muatDataOtomatis() {
+    if (tombolMuat) {
+        tombolMuat.textContent = "Sedang Memuat Data...";
+        tombolMuat.disabled = true;
+    }
 
-    // Mengambil data dari Google Spreadsheet
     fetch(urlSpreadsheet)
         .then(response => response.text())
         .then(data => {
             ubahCsvKeTabel(data);
-            tombolMuat.textContent = "Data Berhasil Diperbarui!";
-            tombolMuat.style.backgroundColor = "#28a745";
-            tombolMuat.disabled = false;
+            
+            // Jika tombol masih ada di HTML, kita ubah statusnya
+            if (tombolMuat) {
+                tombolMuat.textContent = "Data Berhasil Diperbarui!";
+                tombolMuat.style.backgroundColor = "#28a745";
+                tombolMuat.disabled = false;
+            }
         })
         .catch(error => {
-            alert("Gagal mengambil data. Pastikan link spreadsheet sudah benar.");
+            alert("Gagal mengambil data otomatis. Pastikan koneksi internet aktif.");
             console.error(error);
-            tombolMuat.textContent = "Coba Lagi";
-            tombolMuat.disabled = false;
+            if (tombolMuat) {
+                tombolMuat.textContent = "Gagal Memuat, Coba Lagi";
+                tombolMuat.disabled = false;
+            }
         });
-});
+}
+
+// 2. JALANKAN FUNGSI DI ATAS OTOMATIS SAAT HALAMAN SELESAI DIMUAT
+document.addEventListener("DOMContentLoaded", muatDataOtomatis);
+
+// 3. TOMBOL TETAP BERFUNGSI JIKA GURU INGIN ME-REFRESH DATA MANUAL
+if (tombolMuat) {
+    tombolMuat.addEventListener('click', muatDataOtomatis);
+}
