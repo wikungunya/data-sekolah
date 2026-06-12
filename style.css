@@ -80,12 +80,16 @@ button:hover {
 }
 
 .wadah-tabel {
-    overflow-x: auto; /* Supaya tabel bisa digeser di HP kalau kepanjangan */
+    width: 100%;          /* Membatasi lebar wadah sesuai layar */
+    overflow-x: auto;     /* Memunculkan scrollbar horizontal jika data kepanjangan */
+    -webkit-overflow-scrolling: touch; /* Biar gesernya mulus kalau dibuka di HP */
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
+    width: 100%; /* Membatasi lebar wadah sesuai layar */
+    border-collapse: collapse; /* Memunculkan scrollbar horizontal jika data kepanjangan */
     margin-top: 10px;
 }
 
