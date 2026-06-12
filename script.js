@@ -20,6 +20,15 @@ function ubahCsvKeTabel(teksCsv) {
             <td>${kolom[1] || '-'}</td> 
             <td>${kolom[2] || '-'}</td> 
             <td>${kolom[3] || '-'}</td> 
+            <td>${kolom[4] || '-'}</td>
+            <td>${kolom[5] || '-'}</td>
+            <td>${kolom[6] || '-'}</td>
+            <td>${kolom[7] || '-'}</td>
+            <td>${kolom[8] || '-'}</td>
+            <td>${kolom[9] || '-'}</td>
+            <td>${kolom[10] || '-'}</td>
+            <td>${kolom[11] || '-'}</td>
+            <td>${kolom[12] || '-'}</td>
         </tr>`;
     }
 
